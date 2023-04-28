@@ -20,11 +20,21 @@ in
       pkgs.tree
       pkgs.pinentry
       pkgs.gnupg
+      pkgs.niv
     ];
+
 
     services.gpg-agent = {
       enable = true;
       pinentryFlavor = "tty";
+    };
+
+    programs.direnv = {
+      enable = true;
+      nix-direnv = {
+        enable = true;
+      };
+      enableBashIntegration = true;
     };
 
     programs.bash = {
@@ -97,6 +107,7 @@ in
             vimPlugins.nvim-cmp
             vimPlugins.cmp-vsnip
             vimPlugins.vim-vsnip
+            vimPlugins.trouble-nvim
       ]; 
 
       extraLuaConfig = (builtins.readFile ./vim-lua.nix);
